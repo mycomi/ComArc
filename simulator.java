@@ -17,17 +17,18 @@ public class simulator {
 
         for (int i = 0; sc.hasNextLine(); i++) {
             temp[i] = sc.nextLine();
-            for(int j=temp[i].length()-1;j >= 0;j--){
-                
-                mc[i][j] = temp[i].charAt(j);
-                
-            }
+            int k = 0;
 
-            
+            for(int j=temp[i].length()-1;j >= 0;j--){
+                mc[i][j] = temp[i].charAt(k);
+                k++;
+            }
 
             String op = String.valueOf(mc[i][24]) + String.valueOf(mc[i][23]) + String.valueOf(mc[i][22]);
 
             Read(op,i);
+
+            
 
         }
 
@@ -38,34 +39,73 @@ public class simulator {
 
     public void Read(String op,int i){
         // String op = String.valueOf(mc[0][24]) + String.valueOf(mc[0][23]) + String.valueOf(mc[0][22]);
+        op = "010";
         System.out.println(op);
+        String rs,rt,rd;
+        String of = "";
+        
         switch (op) {
             case "000":
-                String rs = String.valueOf(mc[i][21]) + String.valueOf(mc[i][20]) + String.valueOf(mc[i][19]);
-                String rt = String.valueOf(mc[i][18]) + String.valueOf(mc[i][17]) + String.valueOf(mc[i][16]);
-                String rd = String.valueOf(mc[i][2]) + String.valueOf(mc[i][1]) + String.valueOf(mc[i][0]);
+                rs = String.valueOf(mc[i][21]) + String.valueOf(mc[i][20]) + String.valueOf(mc[i][19]);
+                rt = String.valueOf(mc[i][18]) + String.valueOf(mc[i][17]) + String.valueOf(mc[i][16]);
+                rd = String.valueOf(mc[i][2]) + String.valueOf(mc[i][1]) + String.valueOf(mc[i][0]);
 
                 Add(rs,rt,rd);
 
                 break;
 
             case "001":
+
+                rs = String.valueOf(mc[i][21]) + String.valueOf(mc[i][20]) + String.valueOf(mc[i][19]);
+                rt = String.valueOf(mc[i][18]) + String.valueOf(mc[i][17]) + String.valueOf(mc[i][16]);
+                rd = String.valueOf(mc[i][2]) + String.valueOf(mc[i][1]) + String.valueOf(mc[i][0]);
+
+                Nand(rs,rt,rd);
                 
                 break;
             
             case "010":
-                
+                rs = String.valueOf(mc[i][21]) + String.valueOf(mc[i][20]) + String.valueOf(mc[i][19]);
+                rt = String.valueOf(mc[i][18]) + String.valueOf(mc[i][17]) + String.valueOf(mc[i][16]);
+                for (int j = 15; j >=0; j--) {
+                    of += String.valueOf(mc[i][j]);
+                }
+                // System.out.println("of:"+of);
+                LoadW(rs,rt,of);
+  
                 break;
                 
             case "011":
+
+                rs = String.valueOf(mc[i][21]) + String.valueOf(mc[i][20]) + String.valueOf(mc[i][19]);
+                rt = String.valueOf(mc[i][18]) + String.valueOf(mc[i][17]) + String.valueOf(mc[i][16]);
+                for (int j = 15; j >=0; j--) {
+                    of += String.valueOf(mc[i][j]);
+                }
+                // System.out.println("of:"+of);
+                StoreW(rs,rt,of);
                 
                 break;
 
             case "100":
+
+                rs = String.valueOf(mc[i][21]) + String.valueOf(mc[i][20]) + String.valueOf(mc[i][19]);
+                rt = String.valueOf(mc[i][18]) + String.valueOf(mc[i][17]) + String.valueOf(mc[i][16]);
+                for (int j = 15; j >=0; j--) {
+                    of += String.valueOf(mc[i][j]);
+                }
+                // System.out.println("of:"+of);
+                Beq(rs,rt,of);
                 
                 break;
 
             case "101":
+
+                rs = String.valueOf(mc[i][21]) + String.valueOf(mc[i][20]) + String.valueOf(mc[i][19]);
+                rd = String.valueOf(mc[i][18]) + String.valueOf(mc[i][17]) + String.valueOf(mc[i][16]);
+                
+                // System.out.println("of:"+of);
+                Jalr(rs,rd);
                 
                 break;
             
@@ -84,7 +124,38 @@ public class simulator {
 
 
     public void Add(String rs1,String rs2,String rd){
-        
+
+        int rs1_dec = Integer.parseInt(rs1,2); 
+        int rs2_dec = Integer.parseInt(rs2,2); ;
+
+        System.out.println(rs1_dec);
 
     }
+
+    public void Nand(String rs1,String rs2,String rd){
+
+        int rs1_dec = Integer.parseInt(rs1,2); 
+        int rs2_dec = Integer.parseInt(rs2,2);
+
+        System.out.println(rs1_dec);
+
+    }
+
+    public void LoadW(String rs1,String rs2,String of){
+
+    }
+
+    public void StoreW(String rs1,String rs2,String of){
+
+    }
+
+    public void Beq(String rs1,String rs2,String of){
+
+    }
+
+    public void Jalr(String rs,String rd){
+
+    }
+
+    
 }
